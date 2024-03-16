@@ -1,0 +1,50 @@
+body{
+    font-family: "JetBrains Mono", monospace;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    left: 0;
+}
+#topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#leftbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#rightbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#screen {
+    margin: auto;
+    position: absolute;
+    height: 90%;
+    width: 80%;
+    top: 10%;
+    left: 10%;
+    background-color: rgba(0, 0, 0, 0);
+}

@@ -51,6 +51,7 @@ const launch = async function(core) {
         // },
     })
 }
+launch("mgba")
 const exit = async function(){
     await nostalgist.exit();
 }
