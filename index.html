@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retro emulator</title>
+    <script src="https://unpkg.com/nostalgist"></script>
+    <script>
+        const start = async function() {
+            const nostalgist = await Nostalgist.launch({
+                element: document.querySelector('#life'),
+
+                // Will load https://example.com/core/fbneo_libretro.js and https://example.com/core/fbneo_libretro.wasm as the launching core
+                // Because of the custom `resolveCoreJs` and `resolveCoreWasm` options
+                core: 'gearboy',
+
+                // Will load https://example.com/roms/mslug.zip as the ROM
+                // Because of the custom `resolveRom` option
+                rom: ['pokemonred.gba'],
+
+                // Will load https://example.com/roms/mslug.zip as the ROM
+                // Because of the custom `resolveRom` option
+                bios: ['gba_bios.bin'],
+
+                // Custom configuration for RetroArch
+                retroarchConfig: {
+                    rewind_enable: true,
+                    savestate_thumbnail_enable: true,
+                },
+
+                // Specify where to load the core files
+                resolveCoreJs(core) {
+                    return `/data/${core}_libretro.js`
+                },
+                resolveCoreWasm(core) {
+                    return `/data/${core}_libretro.wasm`
+                },
+
+                // Specify where to load the ROM files
+                resolveRom(file) {
+                    return `/gba/${file}`
+                },
+
+                // Specify where to load the BIOS files
+                resolveBios(bios) {
+                    return `/bios/${bios}`
+                },
+            })
+        }
+        const start2 = async function(){
+            var audioContext = new AudioContext();
+            const x = await Nostalgist.gba("http://localhost:8000/gba/pokemonred.gba")
+        }
+        // start();
+        start2();
+
+    </script>
+    <style>
+        #heading{
+            position: fixed;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+Hello
+<div id="heading">POKEMON PLAYEER</div>
+<canvas id="life" width="500" height="500">;)</canvas>
+</body>
+</html>
