@@ -55,7 +55,6 @@ const exit = async function(){
     await nostalgist.exit();
 }
 const saveState = async function(slot_index){
-    await new Promise(resolve => setTimeout(resolve, 5000))
     const state_blob = await nostalgist.saveState();
     let request = window.indexedDB.open("statesdb", 3);
     request.onerror = (event) => {
@@ -76,12 +75,11 @@ const saveState = async function(slot_index){
     };
 }
 const loadState = async function(slot_index){
-    await new Promise(resolve => setTimeout(resolve, 15000))
     let request = window.indexedDB.open("statesdb", 3);
     var got_saved_slot = false;
     var state_blob;
     request.onerror = (event) => {
-        alert("Error saving game!!!");
+        alert("Error loading game!!!");
     };
     request.onsuccess = (event) => {
         let db = event.target.result;
@@ -92,18 +90,13 @@ const loadState = async function(slot_index){
             objectStoreRequest.onerror = (event) => {
                 console.log("error retreiving state from objectStore")
             }
-            objectStoreRequest.onsuccess = (event) => {
+            objectStoreRequest.onsuccess = async (event) => {
                state_blob = event.target.result;
+               await nostalgist.loadState(state_blob['state']);
                got_saved_slot = true;
             }
         } catch {
             alert("No saved slots");
         }
     };
-    if(got_saved_slot){
-       await nostalgist.loadState(state_blob['state']);
-    }
 }
-
-const hello = async function(){await new Promise(r => setTimeout(r, 5000)); console.log("hello", rom)}
-hello();
