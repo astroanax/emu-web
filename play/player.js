@@ -1,8 +1,8 @@
 var nostalgist;
-var rom = "pokemonred.gba";
+var rom = "none";
 const launch = async function(core) {
+    console.log(rom);
     nostalgist = await Nostalgist.launch({
-
         // Will load https://example.com/core/fbneo_libretro.js and https://example.com/core/fbneo_libretro.wasm as the launching core
         // Because of the custom `resolveCoreJs` and `resolveCoreWasm` options
         core: core,
@@ -10,7 +10,6 @@ const launch = async function(core) {
         // Will load https://example.com/roms/mslug.zip as the ROM
         // Because of the custom `resolveRom` option
         rom: rom,
-
         // Will load https://example.com/roms/mslug.zip as the ROM
         // Because of the custom `resolveRom` option
         // bios: ['gba_bios.bin'],
@@ -51,7 +50,7 @@ const launch = async function(core) {
         // },
     })
 }
-launch("mgba")
+//launch("mgba")
 const exit = async function(){
     await nostalgist.exit();
 }
@@ -105,3 +104,6 @@ const loadState = async function(slot_index){
        await nostalgist.loadState(state_blob['state']);
     }
 }
+
+const hello = async function(){await new Promise(r => setTimeout(r, 5000)); console.log("hello", rom)}
+hello();
