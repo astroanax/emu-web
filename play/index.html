@@ -6,21 +6,53 @@
     <script src="https://unpkg.com/nostalgist"></script>
     <script defer src="/play/player.js"></script>
     <link rel="stylesheet" href="/style.css">
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
 <body>
-<div id="topbar">Pokemulator</div>
+<div id="topbar"><img id="pokeball" src="/pokeball.png" style='max-height: 100%; max-width: 3%;'>Pokemulator</div>
 <div id="screen">
-    <div id="upload"></div>
-    <div id="catalog">
-        <div onclick="rom='pokemonred.gba'; launch('mgba')">Pokemon FireRed</div>
+	<div id="loading">Loading...</div>
+    <div class="nes-container with-title" id="catalog">
+	    <div class="item nes-container with-title is-centered" onclick="rom='pokemonred.gba'; launch('mgba')"><p class="title">Pokemon FireRed</p><img src="/cover/pokemon-fire-red-version-v1-1.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='AnimalCrossing-WildWorldELegacy.zip'; customLaunch('melonds')"><div class="title">Animal Crossing - Wild World Legacy</div><img src="/cover/0389-animal-crossing-wild-world.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='DonkeyKongCountryUV1.2.zip'; launch('snes9x')"><div class="title">Donkey Kong Country</div><img src="/cover/donkey-kong-country-v1-2.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Doom1993IdSoftware.zip'; launch('core')"><div class="title">Doom 1993</div><img src="/cover/doom-cover-340x483.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='DragonQuestV-HandoftheHeavenlyBrideUSM3XenoPhobia.zip'; customLaunch('melonds')"><div class="title">Dragon Quest</div><img src="/cover/3424-dragon-quest-v-hand-of-the-heavenly-bride-us.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Frogger1982ParkerBros.zip'; customLaunch('stella2014')"><div class="title">Frogger 1982</div><img src="/cover/frogger.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='GrandTheftAuto-ChinatownWarsUSM5XenoPhobia.zip'; customLaunch('melonds')"><div class="title">Grand Theft Auto - Chinatown Wars</div><img src="/cover/3517-grand-theft-auto-chinatown-wars-us.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='LegendofZeldaThe-ALinktothePastU.zip'; launch('snes9x')"><div class="title">Legend of the Zelda - A Link to the Past</div><img src="/cover/legend-of-zelda-the-a-link-to-the-past.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='LegendofZeldaThe-LinksAwakeningG.zip'; launch('gearboy')"><div class="title">Legend of Zelda - The Link's Awakening</div><img src="/cover/legend-of-zelda-the-link-s-awakening.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='MarioKartSuperCircuitU.zip'; launch('mgba')"><div class="title">MarioKart Super Circuit</div><img src="/cover/mario-kart-super-circuit.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='MetroidFusionU.zip'; launch('mgba')"><div class="title">Metroid Fusion</div><img src="/cover/metroid-fusion.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Pac-ManJ.zip'; launch('gearboy')"><div class="title">Pac-Man</div><img src="/cover/pac-man.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Pokemon-FireRedVersionUV1.1.zip'; launch('mgba')"><div class="title">Pokemon FireRed</div><img src="/cover/pokemon-fire-red-version-v1-1.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Pokemon-RedVersionUE.zip'; launch('gambatte')"><div class="title">Pokemon Red</div><img src="/cover/pokemon-red-version.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Pokemon-SilverVersionUEC.zip'; launch('gambatte')"><div class="title">Pokemon Silver</div><img src="/cover/pokemon-silver-version.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Quake64U.zip'; customLaunch('mupen64plus_next')"><div class="title">Quake</div><img src="/cover/quake-64.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Sims2TheETrashman.zip'; customLaunch('melonds')"><div class="title">Sims 2 - The Trashman</div><img src="/cover/0162-sims-2-the.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='SonicAdvanceU.zip'; launch('mgba')"><div class="title">Sonic Advance</div><img src="/cover/sonic-advance.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='StreetFighterCollection2.7z'; launch('pcsx_rearmed')"><div class="title">Street Fighter</div><img src="/cover/street-fighter-collection.jpg"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='SuperBombermanU.zip'; launch('snes9x')"><div class="title">Super Bomberman</div><img src="/cover/super-bomberman.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='SuperMarioWorldU.zip'; launch('snes9x')"><div class="title">Super Mario World</div><img src="/cover/super-mario-world.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='TetrisU.zip'; launch('nestopia')"><div class="title">Tetris</div><img src="/cover/tetris.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='Zelda2-TheAdventureofLinkU.zip'; launch('nestopia')"><div class="title">Zelda 2 - The Adventure of Link</div><img src="/cover/zelda-2-the-adventure-of-link.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='finalfantasy.zip'; launch('nestopia')"><div class="title">Final Fantasu</div><img src="/cover/final-fantasy.webp"></div>
+	    <div class="item nes-container with-title is-centered" onclick="rom='kirbysadventure.nes'; launch('nestopia')"><p class="title">Kirby's Adventure</p><img src="/cover/kirby-s-adventure.webp"></div>
     </div>
 </div>
-<div id="leftbar">hi</div>
+<div id="leftbar">
+	<div class='nes-container with-title slots-container'>
+	<h2 class='title' id="slots-container-title">Save</h2>
+		<div class='item' id='slot1'></div>
+		<div class='item' id='slot2'></div>
+		<div class='item' id='slot3'></div>
+	</div>
+</div>
 <div id="rightbar">
-    <button id="exit" onclick="exit()">Exit</button>
-    <button id="save" onclick="saveState(1)">Save</button>
-    <button id="load" onclick="loadState(1)">Load</button>
+    <div id="save" onclick="saveGame()">Save</div>
+    <div id="load" onclick="loadGame()">Load</div>
+    <div id="exit" onclick="exit()">Exit</div>
 </div>
 </body>
 </html>

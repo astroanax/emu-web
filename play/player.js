@@ -160,10 +160,16 @@ const loadState = async function(slot_index){
 }
 
 const saveGame = function(){
-    if (document.getElementsByClassName("slots-container")[0].style.display == "block")
-        document.getElementsByClassName("slots-container")[0].style.display = "none";
-    else
-        document.getElementsByClassName("slots-container")[0].style.display = "block";
+    let slots_container = document.getElementsByClassName("slots-container")[0];
+    let slots_container_title = document.getElementById("slots-container-title");
+    if(slots_container_title.textContent.includes("Load") || slots_container_title.textContent ==""){
+        slots_container_title.textContent = "Save";
+    } else {
+        if (slots_container.style.display == "block")
+            slots_container.style.display = "none";
+        else
+            slots_container.style.display = "block";
+    }
 
     let request = window.indexedDB.open("statesdb", 3);
     var got_saved_slot = false;
@@ -185,12 +191,67 @@ const saveGame = function(){
                 objectStoreRequest.onsuccess = async (event) => {
                     state_blob = event.target.result;
                     console.log(state_blob);
-                    let ele = document.getElementById("slot"+slot_index);
+                    let old_ele = document.getElementById("slot"+slot_index);
+                    let ele = old_ele.cloneNode(true);
+                    old_ele.parentNode.replaceChild(ele, old_ele);
                     ele.addEventListener("click", function(){
                         saveState(slot_index);
                         alert("Saved to slot " + slot_index);
                     })
                     if(typeof state_blob != 'undefined'){
+                        if(!ele.hasChildNodes())
+                            ele.insertAdjacentHTML("afterbegin", `<img class="thumb" id='slot${slot_index}img'>`)
+                        let img = document.getElementById("slot"+slot_index+"img");
+                        let url = URL.createObjectURL(state_blob['thumbnail']);
+                        img.src = url;
+                    }
+                }
+            }
+        } catch {
+            //alert("No saved slots");
+        }
+    };
+}
+const loadGame = function(){
+    let slots_container = document.getElementsByClassName("slots-container")[0];
+    let slots_container_title = document.getElementById("slots-container-title");
+    if(slots_container_title.textContent.includes("Save") || slots_container_title.textContent ==""){
+        slots_container_title.textContent = "Load";
+    } else {
+        if (slots_container.style.display == "block")
+            slots_container.style.display = "none";
+        else
+            slots_container.style.display = "block";
+    }
+
+    let request = window.indexedDB.open("statesdb", 3);
+    var got_saved_slot = false;
+    var state_blob;
+    request.onerror = (event) => {
+        //alert("Error loading game!!!");
+    };
+    var saved_states = [];
+    request.onsuccess = (event) => {
+        let db = event.target.result;
+        try{
+            let transaction = db.transaction(rom, "readwrite");
+            let objectStore = transaction.objectStore(rom);
+            for(let slot_index = 1; slot_index<4; slot_index++){
+                let objectStoreRequest = objectStore.get(slot_index)
+                objectStoreRequest.onerror = (event) => {
+                    console.log("error retreiving state from objectStore")
+                }
+                objectStoreRequest.onsuccess = async (event) => {
+                    state_blob = event.target.result;
+                    console.log(state_blob);
+                    let old_ele = document.getElementById("slot"+slot_index);
+                    let ele = old_ele.cloneNode(true);
+                    old_ele.parentNode.replaceChild(ele, old_ele);
+                    if(typeof state_blob != 'undefined'){
+                        ele.addEventListener("click", function(){
+                            loadState(slot_index);
+                            alert("Loaded from slot " + slot_index);
+                        })
                         if(!ele.hasChildNodes()){
                             ele.insertAdjacentHTML("afterbegin", `<img class="thumb" id='slot${slot_index}img'>`)
                         }
